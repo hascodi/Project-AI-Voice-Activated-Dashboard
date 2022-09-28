@@ -1,0 +1,35 @@
+{
+	"intents": [
+		{
+			"tag": "gtDashboard3",
+			"patterns": [
+				"Go to dashboard three",
+				"Dashboard three",
+				"Navigate to dashboard three",
+				"Open dashboard three"
+			]
+		},
+		{
+			"tag": "salesStats",
+			"patterns": [
+				"Show me sales statistics",
+				"Sales statistics",
+				"Go to sales statistics",
+				"Open sales statistics"
+			]
+		},
+		{
+			"tag": "uncheckTodos",
+			"patterns": ["Uncheck all todos", "Uncheck", "Todos"]
+		},
+		{
+			"tag": "sendMessage",
+			"patterns": [
+				"Send new message",
+				"Send message",
+				"Message",
+				"Answer message"
+			]
+		}
+	]
+}
