@@ -70,7 +70,7 @@ jQuery(document).ready(function () {
 											break;
 										case "sendMessage":
 											$(".chat-input").val = "hey friend";
-											$(".notika-chat-btn").trigger("click");
+											$(".website-chat-btn").trigger("click");
 											break;
 										default:
 											alert(msg);

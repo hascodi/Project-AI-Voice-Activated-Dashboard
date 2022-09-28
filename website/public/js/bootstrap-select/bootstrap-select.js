@@ -345,8 +345,8 @@
     liveSearchNormalize: false,
     liveSearchStyle: 'contains',
     actionsBox: false,
-    iconBase: 'notika-icon',
-    tickIcon: 'notika-checked',
+    iconBase: 'website-icon',
+    tickIcon: 'website-checked',
     showTick: false,
     template: {
       caret: '<span class="caret"></span>'

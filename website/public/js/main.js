@@ -46,12 +46,12 @@
 		});
 		$('.menu-switcher-pro').on('click', function () {
 			var button = $(this).find('i.nk-indicator');
-			button.toggleClass('notika-menu-befores').toggleClass('notika-menu-after');
+			button.toggleClass('website-menu-befores').toggleClass('website-menu-after');
 			
 		});
 		$('.menu-switcher-pro.fullscreenbtn').on('click', function () {
 			var button = $(this).find('i.nk-indicator');
-			button.toggleClass('notika-back').toggleClass('notika-next-pro');
+			button.toggleClass('website-back').toggleClass('website-next-pro');
 		});
 		/*--------------------------
 		 Button BTN Left
@@ -77,7 +77,7 @@
 				scrollbarPosition: "outside",
 				theme:"light-1"
 			});
-			$(".notika-todo-scrollbar").mCustomScrollbar({
+			$(".website-todo-scrollbar").mCustomScrollbar({
 				setHeight:445,
 				autoHideScrollbar: true,
 				scrollbarPosition: "outside",
