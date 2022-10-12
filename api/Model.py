@@ -18,7 +18,7 @@ wav = scaled.astype(np.float32) / 32768.0
 wav = wav.reshape(-1)
 print(wav)
 plt.figure(figsize=(14, 5))
-librosa.display.waveplot(wav, sr=sample_rate)
+librosa.display.waveshow(wav, sr=sample_rate)
 librosa.display.specshow(librosa.amplitude_to_db(np.abs(librosa.stft(wav)), ref=np.max), y_axis='log', x_axis='time')
 plt.colorbar(format='%+2.0f dB')
 plt.title('Power spectrogram')
