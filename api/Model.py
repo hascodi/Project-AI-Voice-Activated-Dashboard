@@ -1,3 +1,4 @@
+from fileinput import filename
 import deeplake
 import flask
 import numpy
@@ -9,9 +10,17 @@ from scipy.io import wavfile
 
 ds = deeplake.load("hub://activeloop/timit-train")
 
-AUDIO_FILE = ds.audios[0].numpy()
+AUDIO_FILE = ds.audios[0]
 
-#samples, sample_rate = librosa.load(AUDIO_FILE, sr = 16000)
+import sounddevice as sd
+import soundfile as sf
+
+sf.write('sound.wav', AUDIO_FILE, 11000)
+filename = 'sound.wav'
+# Extract data and sampling rate from file
+data, fs = sf.read(filename, dtype='float32')  
+sd.play(data, fs)
+status = sd.wait()  # Wait until file is done playing
 
 plt.plot(AUDIO_FILE)
 plt.show()
