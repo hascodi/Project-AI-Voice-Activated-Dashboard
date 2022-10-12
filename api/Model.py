@@ -1,7 +1,18 @@
-import pandas as pd
+import deeplake
+import flask
+import numpy
+import torch
+import librosa.display
+from matplotlib import pyplot as plt
+import librosa.display
+from scipy.io import wavfile
 
+ds = deeplake.load("hub://activeloop/timit-train")
 
-trainLegend = pd.read_csv('..//datasets/cv-corpus-11.0-2022-09-21/nl/train.tsv', sep='\t')
-testLegend = pd.read_csv('..//datasets/cv-corpus-11.0-2022-09-21/nl/test.tsv', sep='\t')
+AUDIO_FILE = ds.audios[0].numpy()
 
-print(trainLegend)
+#samples, sample_rate = librosa.load(AUDIO_FILE, sr = 16000)
+
+plt.plot(AUDIO_FILE)
+plt.show()
+
