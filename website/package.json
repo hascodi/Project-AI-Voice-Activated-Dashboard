@@ -9,19 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/speech": "^4.2.0",
-    "@google-cloud/storage": "^5.7.0",
-    "axios": "^0.21.1",
-    "body-parser": "^1.19.0",
-    "brain.js": "^2.0.0-beta.2",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "fs": "^0.0.1-security",
-    "jquery": "^3.5.1",
-    "jsdom": "^16.4.0",
-    "wink-tokenizer": "^5.2.3"
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "wink-porter2-stemmer": "^2.0.1"
   }
 }
