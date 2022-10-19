@@ -141,3 +141,5 @@ cython_debug/
 # IDEA
 .idea
 
+# Dataset
+./input
