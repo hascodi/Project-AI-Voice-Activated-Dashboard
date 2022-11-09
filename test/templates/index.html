@@ -104,8 +104,7 @@
     <video id="preview" width="160" height="120" autoplay="" muted=""></video>
   </div>
   <div class="right">
-    <div id="stopButton" class="button">Stop Recording</div>
-    <h2>Recording</h2>
+      <h2>Recording</h2>
     <video id="recording" width="160" height="120" controls=""></video>
     <a id="downloadButton" class="button"> Download </a>
   </div>
@@ -117,7 +116,6 @@
     let preview = document.getElementById("preview");
     let recording = document.getElementById("recording");
     let startButton = document.getElementById("startButton");
-    let stopButton = document.getElementById("stopButton");
     let downloadButton = document.getElementById("downloadButton");
     let logElement = document.getElementById("log");
 
@@ -148,6 +146,7 @@
         () => {
           if (recorder.state === "recording") {
             recorder.stop();
+            stream.getTracks().forEach((track) => track.stop());
           }
         },
       );
@@ -157,10 +156,6 @@
         recorded
       ])
         .then(() => data);
-    }
-
-    function stop(stream) {
-      stream.getTracks().forEach((track) => track.stop());
     }
 
     startButton.addEventListener("click", () => {
@@ -175,10 +170,11 @@
       }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
         .then((recordedChunks) => {
           let recordedBlob = new Blob(recordedChunks, { type: "audio/wav" });
-          recording.src = URL.createObjectURL(recordedBlob);
-          downloadButton.href = recording.src;
-          downloadButton.download = "RecordedVideo.wav";
-
+          var data = new FormData();
+          data.append('file' , recordedBlob);
+          var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+          xhr.open( 'post', '/result');
+          xhr.send(data);
           log(`Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
         })
         .catch((error) => {
