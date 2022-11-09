@@ -13,23 +13,13 @@ def index():
     return render_template('index.html')
 
 @app.route('/result', methods=['POST'])
-def result():
-    blobData = request.files['data']
-    filename = secure_filename(blobData.filename)
-    filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-    blobData.save(filepath)
-    
-    app.logger.info('blob data : ', blobData)
-    data, samplerate = soundfile.read(blobData)
-
-    soundfile.write('new.wav', data, samplerate, subtype='PCM_16')
-
-    with open("new.wav", 'rb') as fp:
-        audio = fp.read()
-
-    res = requests.post(url, headers=headers, data=audio)
-    
-    return res.text
+def api_post_audio_blob():        
+    blob =  request.form['blob']
+    print(blob)
+    with open('file.wav', 'wb') as f:
+        f.write(blob)
+        f.close()
+    return blob
 
 if __name__=='__main__':
     app.debug=True
