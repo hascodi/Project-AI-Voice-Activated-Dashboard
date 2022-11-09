@@ -1,0 +1,21 @@
+2022-10-12T11:15:51,255 Using pip 20.2.4 from /Users/wouterweemaes/miniforge3/envs/tf_m1_final_3.10/lib/python3.10/site-packages/pip (python 3.10)
+2022-10-12T11:15:51,256 Non-user install because site-packages writeable
+2022-10-12T11:15:51,265 Created temporary directory: /private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-ephem-wheel-cache-6cxvk76c
+2022-10-12T11:15:51,265 Created temporary directory: /private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-req-tracker-etv5ytzj
+2022-10-12T11:15:51,265 Initialized build tracking at /private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-req-tracker-etv5ytzj
+2022-10-12T11:15:51,265 Created build tracker: /private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-req-tracker-etv5ytzj
+2022-10-12T11:15:51,265 Entered build tracker: /private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-req-tracker-etv5ytzj
+2022-10-12T11:15:51,265 Created temporary directory: /private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-install-nk9ug39q
+2022-10-12T11:15:51,265 ERROR: You must give at least one requirement to install (see "pip help install")
+2022-10-12T11:15:51,265 Exception information:
+2022-10-12T11:15:51,265 Traceback (most recent call last):
+2022-10-12T11:15:51,265   File "/Users/wouterweemaes/miniforge3/envs/tf_m1_final_3.10/lib/python3.10/site-packages/pip/_internal/cli/base_command.py", line 228, in _main
+2022-10-12T11:15:51,265     status = self.run(options, args)
+2022-10-12T11:15:51,265   File "/Users/wouterweemaes/miniforge3/envs/tf_m1_final_3.10/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 182, in wrapper
+2022-10-12T11:15:51,265     return func(self, options, args)
+2022-10-12T11:15:51,265   File "/Users/wouterweemaes/miniforge3/envs/tf_m1_final_3.10/lib/python3.10/site-packages/pip/_internal/commands/install.py", line 294, in run
+2022-10-12T11:15:51,265     reqs = self.get_requirements(args, options, finder, session)
+2022-10-12T11:15:51,265   File "/Users/wouterweemaes/miniforge3/envs/tf_m1_final_3.10/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 357, in get_requirements
+2022-10-12T11:15:51,265     raise CommandError(
+2022-10-12T11:15:51,265 pip._internal.exceptions.CommandError: You must give at least one requirement to install (see "pip help install")
+2022-10-12T11:15:51,283 Removed build tracker: '/private/var/folders/7y/l53hgk0n4fs7m2pw80bp74tr0000gn/T/pip-req-tracker-etv5ytzj'
