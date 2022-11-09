@@ -12,14 +12,14 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def index():
     return render_template('index.html')
 
-@app.route('/result', methods=['POST'])
-def api_post_audio_blob():        
-    blob =  request.form['blob']
-    print(blob)
-    with open('file.wav', 'wb') as f:
-        f.write(blob)
-        f.close()
-    return blob
+@app.route('/result', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['file']
+      f.save(secure_filename(f.filename + ".wav"))
+      return 'file uploaded successfully'
+
+
 
 if __name__=='__main__':
     app.debug=True

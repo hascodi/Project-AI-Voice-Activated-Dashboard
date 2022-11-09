@@ -119,7 +119,7 @@
     let downloadButton = document.getElementById("downloadButton");
     let logElement = document.getElementById("log");
 
-    let recordingTimeMS = 1000;
+    let recordingTimeMS = 5000;
 
     function log(msg) {
       logElement.innerHTML += `${msg}\n`;
@@ -171,14 +171,10 @@
         .then((recordedChunks) => {
           let recordedBlob = new Blob(recordedChunks, { type: "audio/wav" });
           var data = new FormData();
-          data.append('blob' , recordedBlob);
+          data.append('file' , recordedBlob);
           var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-          xhr.open( 'post', '/result', true );
+          xhr.open( 'post', '/result');
           xhr.send(data);
-          recording.src = URL.createObjectURL(recordedBlob);
-          downloadButton.href = recording.src;
-          downloadButton.download = "RecordedVideo.wav";
-
           log(`Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
         })
         .catch((error) => {
