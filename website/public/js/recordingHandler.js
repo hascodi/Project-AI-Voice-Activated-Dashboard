@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
 									switch (msg) {
 										case "gtDashboard3":
 											window.location.href =
-												"http://localhost:3000/index-3.html";
+												"../pages/index-3.html";
 											break;
 										case "salesStats":
 											$(

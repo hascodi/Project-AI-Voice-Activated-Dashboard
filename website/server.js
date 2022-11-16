@@ -8,20 +8,4 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(cors());
 
-/*
 app.listen(port, () => console.log(`listening on port ${port}!`));
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads/')
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '.wav') //Appending .jpg
-    }
-  })
-  
-  var upload = multer({ storage: storage });
-app.post("/result", upload.single('file'), function(res,response){
-  });
-
-
-*/
