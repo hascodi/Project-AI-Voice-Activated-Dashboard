@@ -143,5 +143,8 @@ cython_debug/
 # IDEA
 .idea
 
-# Dataset
-./Tensorflow/input
+# OwnDataset
+/Dataset/OwnDataset
+/Data/DigitDataset
+/Data/mini_speech_commands/
+Data/OwnDataset
