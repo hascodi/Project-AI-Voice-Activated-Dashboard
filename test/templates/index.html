@@ -41,11 +41,6 @@
       font: 14px "Open Sans", "Arial", sans-serif;
     }
 
-    video {
-      margin-top: 2px;
-      border: 1px solid black;
-    }
-
     .button {
       cursor: pointer;
       display: block;
@@ -77,11 +72,6 @@
       width: 160px;
       padding: 0px;
     }
-
-    .bottom {
-      clear: both;
-      padding-top: 10px;
-    }
   </style>
 
   <title>Recording a media element - example_of_recording_a_media_element - code sample</title>
@@ -90,40 +80,16 @@
 </head>
 
 <body>
-
-  <p>
-    Click the "Start Recording" button to begin video recording for a few seconds.
-    You can stop recording by clicking the "Stop Recording" button. The "Download"
-    button will download the received data (although it's in a raw, unwrapped form
-    that isn't very useful).
-  </p>
-  <br>
   <div class="left">
     <div id="startButton" class="button">Start Recording</div>
-    <h2>Preview</h2>
-    <video id="preview" width="160" height="120" autoplay="" muted=""></video>
-  </div>
-  <div class="right">
-      <h2>Recording</h2>
-    <video id="recording" width="160" height="120" controls=""></video>
-    <a id="downloadButton" class="button"> Download </a>
-  </div>
-  <div class="bottom">
-    <pre id="log"
-      style="position: relative;"><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
-  </div>
+    <h2 hidden>Preview</h2>
+    <video id="preview" width="0" height="0" autoplay="" muted=""></video>
   <script>
-    let preview = document.getElementById("preview");
     let recording = document.getElementById("recording");
     let startButton = document.getElementById("startButton");
-    let downloadButton = document.getElementById("downloadButton");
     let logElement = document.getElementById("log");
 
-    let recordingTimeMS = 5000;
-
-    function log(msg) {
-      logElement.innerHTML += `${msg}\n`;
-    }
+    let recordingTimeMS = 2000;
 
     function wait(delayInMS) {
       return new Promise((resolve) => setTimeout(resolve, delayInMS));
@@ -135,7 +101,7 @@
 
       recorder.ondataavailable = (event) => data.push(event.data);
       recorder.start();
-      log(`${recorder.state} for ${lengthInMS / 1000} seconds…`);
+      console.log(`${recorder.state} for ${lengthInMS / 1000} seconds…`);
 
       let stopped = new Promise((resolve, reject) => {
         recorder.onstop = resolve;
@@ -164,7 +130,6 @@
         audio: true
       }).then((stream) => {
         preview.srcObject = stream;
-        downloadButton.href = stream;
         preview.captureStream = preview.captureStream || preview.mozCaptureStream;
         return new Promise((resolve) => preview.onplaying = resolve);
       }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
@@ -175,24 +140,17 @@
           var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
           xhr.open( 'post', '/result');
           xhr.send(data);
-          log(`Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
+          console.log(`Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
         })
         .catch((error) => {
           if (error.name === "NotFoundError") {
-            log("Camera or microphone not found. Can't record.");
+            console.log("Camera or microphone not found. Can't record.");
           } else {
-            log(error);
+            console.log(error);
           }
         });
     }, false);
 
-    stopButton.addEventListener("click", () => {
-      stop(preview.srcObject);
-    }, false);
-
   </script>
-
-
 </body>
-
 </html>
