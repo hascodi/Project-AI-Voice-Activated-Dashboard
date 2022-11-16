@@ -16,7 +16,6 @@ def index():
 def upload_file():
    if request.method == 'POST':
       f = request.files['file']
-      f.save(secure_filename(f.filename + ".wav"))
       return 'file uploaded successfully'
 
 
