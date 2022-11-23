@@ -1,15 +1,10 @@
 from starlette.responses import FileResponse
 from fastapi import FastAPI, Response, Request, Body
 from fastapi.staticfiles import StaticFiles
+import multipart
+
 
 app = FastAPI()
-def saveFile(blob):
-    with open('blob.wav', 'w') as file:
-        file.write(blob)
-
-
-
-
 
 
 app.mount("/css", StaticFiles(directory="css"), name="css")
@@ -34,13 +29,15 @@ async def read_index():
 async def read_index():
     return FileResponse('style.css')
 
+
 @app.post("/uploadfile")
 async def create_upload_file(request: Request):
-    file = await request.body()
-    saveFile(file)
-    return "pops"
-
-
+    form_data = await request.form()
+    form_data = form_data.get('file')
+    contents = form_data.file.read()
+    with open('blob.wav', 'wb') as file:
+            file.write(contents)
+    return form_data
 
 
 
