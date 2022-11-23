@@ -48,7 +48,7 @@ function recordAudio() {
             var data = new FormData();
             data.append('file' , recordedBlob);
             var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-            xhr.open( 'post', 'http://localhost:5001/result');
+            xhr.open( 'post', 'http://localhost:8000/uploadfile');
             xhr.send(data);
             console.log(`Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
         })
