@@ -1,4 +1,4 @@
-let recordingTimeMS = 2000;
+let recordingTimeMS = 1000;
 
 function wait(delayInMS) {
     return new Promise((resolve) => setTimeout(resolve, delayInMS));
