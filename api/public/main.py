@@ -5,6 +5,7 @@ from fastapi.responses import RedirectResponse
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+import moviepy.editor as moviepy
 
 router = APIRouter()
 
@@ -26,19 +27,15 @@ async def read_index():
 async def create_upload_file(request: Request):
     form_data = await request.form()
     form_data = form_data.get('file')
-    contents = form_data.file.read()
+    #contents = form_data.file.read()
     res = "index.html"
 
-    with open('test.wav', 'wb') as f:
-        f.write(contents)
-
-    #path = 'test.wav'
-    #path = "../Data/AudioFragments/naamloos1.wav"
+    audio = tf.io.decode_base64(form_data)
 
     #label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
     imported = tf.saved_model.load("../NoteBooks/saved")
-    prediction = imported(contents)
+    prediction = imported(audio)
     result = np.argmax(prediction[0])
     print(label_names[result])
 
