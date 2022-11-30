@@ -29,18 +29,20 @@ async def create_upload_file(request: Request):
     contents = form_data.file.read()
     res = "index.html"
 
-    with open('test.wev', 'wb') as f:
+    with open('test.wav', 'wb') as f:
         f.write(contents)
 
-    path = contents
+    #path = 'test.wav'
+    #path = "../Data/AudioFragments/naamloos1.wav"
+
     #label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
-    imported = tf.saved_model.load("../NoteBooks/savedWords")
-    prediction = imported(path)
+    imported = tf.saved_model.load("../NoteBooks/saved")
+    prediction = imported(contents)
     result = np.argmax(prediction[0])
     print(label_names[result])
 
-    return label_names[result]
+    return "up"#label_names[result]
 
 @router.get("/index.html")
 async def read_index():
