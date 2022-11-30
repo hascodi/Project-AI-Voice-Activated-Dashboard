@@ -47,10 +47,18 @@ function recordAudio() {
             let recordedBlob = new Blob(recordedChunks, { type: "audio/wav" });
             var data = new FormData();
             data.append('file' , recordedBlob);
-            var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+            var xhr =  new XMLHttpRequest() ;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    
+                    window.open(`http://localhost:8000/${ xhr.responseText.replaceAll('"',"")}`)
+                }
+            }
             xhr.open( 'post', 'http://localhost:8000/uploadfile');
             xhr.send(data);
             console.log(`Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
+            
+        
         })
         .catch((error) => {
             if (error.name === "NotFoundError") {
