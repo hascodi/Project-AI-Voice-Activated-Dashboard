@@ -2,6 +2,10 @@ from starlette.responses import FileResponse
 from fastapi import FastAPI, Response, Request, Body
 from fastapi.staticfiles import StaticFiles
 import multipart
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+
 
 
 app = FastAPI()
@@ -35,9 +39,15 @@ async def create_upload_file(request: Request):
     form_data = await request.form()
     form_data = form_data.get('file')
     contents = form_data.file.read()
-    with open('blob.wav', 'wb') as file:
-            file.write(contents)
-    return form_data
+    path = "../Data/AudioFragments/test.wav"
+    label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    # label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
+    imported = tf.saved_model.load("../NoteBooks/saved")
+    prediction = imported(path)
+    result = np.argmax(prediction[0])
+    print(label_names[result])
+
+
 
 
 
