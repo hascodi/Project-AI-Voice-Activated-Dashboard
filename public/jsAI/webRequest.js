@@ -37,13 +37,12 @@ function recordAudio() {
                             xhr.send(JSON.stringify({audio: base64data}));*/
 
 
-                            var data = new FormData();
+                            const data = new FormData();
                             data.append('file', base64data.toString());
-                            var xhr = new XMLHttpRequest();
+                            const xhr = new XMLHttpRequest();
                             xhr.onreadystatechange = function () {
-                                if (xhr.readyState == XMLHttpRequest.DONE) {
-
-                                    window.open(`http://localhost:8000/${xhr.responseText.replaceAll('"', "")}`)
+                                if (xhr.readyState === XMLHttpRequest.DONE) {
+                                    alert(xhr.response.text())
                                 }
                             }
                             xhr.open('post', 'http://localhost:8000/uploadfile');
