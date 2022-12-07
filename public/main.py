@@ -21,7 +21,7 @@ async def read_index():
     return FileResponse('index.html')
 
 
-@router.get("/uploadfile")
+@router.post("/uploadfile")
 async def create_upload_file(request: Request):
     form_data = await request.form()
     form_data = form_data.get('file')
