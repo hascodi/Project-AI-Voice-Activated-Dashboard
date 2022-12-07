@@ -25,14 +25,17 @@ async def read_index():
 async def create_upload_file(request: Request):
     form_data = await request.form()
     form_data = form_data.get('file')
+    contents = await form_data.read()
 
-    audio = tf.io.decode_base64(form_data)
+    x, _ = tf.audio.decode_wav(contents, desired_channels=1, desired_samples=16000, )
+    x = tf.squeeze(x, axis=-1)
+    x = x[tf.newaxis, :]
 
     # Predict
     # label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
     imported = tf.saved_model.load("../NoteBooks/saved")
-    prediction = imported(audio)
+    prediction = imported(x)
     result = np.argmax(prediction[0])
     print(label_names[result])
 
