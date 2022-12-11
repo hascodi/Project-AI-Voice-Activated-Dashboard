@@ -26,6 +26,9 @@ async def create_upload_file(request: Request):
     form_data = await request.form()
     form_data = form_data.get('file')
     contents = await form_data.read()
+    with open("test.wav","wb") as f:
+        f.write(contents)
+        f.close
 
     x, _ = tf.audio.decode_wav(contents, desired_channels=1, desired_samples=16000, )
     x = tf.squeeze(x, axis=-1)
