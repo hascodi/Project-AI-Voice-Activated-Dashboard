@@ -5,6 +5,8 @@ from fastapi.staticfiles import StaticFiles
 import tensorflow as tf
 import numpy as np
 
+digit = False
+
 router = APIRouter()
 
 router.mount("/css", StaticFiles(directory="css"), name="css")
@@ -26,18 +28,25 @@ async def create_upload_file(request: Request):
     form_data = await request.form()
     form_data = form_data.get('file')
     contents = await form_data.read()
-    with open("test.wav","wb") as f:
-        f.write(contents)
-        f.close
+    # with open("test.wav","wb") as f:
+    #     f.write(contents)
+    #     f.close
 
-    x, _ = tf.audio.decode_wav(contents, desired_channels=1, desired_samples=16000, )
+    if digit:
+        x, _ = tf.audio.decode_wav(contents, desired_channels=1, desired_samples=8000, )
+        label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        imported = tf.saved_model.load("../NoteBooks/saved-Digit")
+
+
+    else:
+        x, _ = tf.audio.decode_wav(contents, desired_channels=1, desired_samples=16000, )
+        label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
+        imported = tf.saved_model.load("../NoteBooks/saved-Words")
+
     x = tf.squeeze(x, axis=-1)
     x = x[tf.newaxis, :]
 
     # Predict
-    # label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
-    imported = tf.saved_model.load("../NoteBooks/saved")
     prediction = imported(x)
     result = np.argmax(prediction[0])
     print(label_names[result])
