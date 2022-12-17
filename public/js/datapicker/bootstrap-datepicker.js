@@ -1649,7 +1649,7 @@
 	};
 
 
-	/* DATEPICKER DATA-API
+	/* DATEPICKER Data-API
 	* ================== */
 
 	$(document).on(

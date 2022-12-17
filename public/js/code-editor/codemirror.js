@@ -5741,7 +5741,7 @@
     return widget;
   }
 
-  // LINE DATA STRUCTURE
+  // LINE Data STRUCTURE
 
   // Line objects. These hold state related to a line, including
   // highlighting info (the styles array).
@@ -6127,7 +6127,7 @@
     }
   }
 
-  // DOCUMENT DATA STRUCTURE
+  // DOCUMENT Data STRUCTURE
 
   // By default, updates that start and end at the beginning of a line
   // are treated specially, in order to make the association of line
