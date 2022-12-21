@@ -1,48 +1,70 @@
 async function recordAudio() {
+  let stream = await navigator.mediaDevices.getUserMedia({
+    video: false,
+    audio: true,
+  })
+  let recorder = new RecordRTCPromisesHandler(stream, {
+    type: 'audio',
+    recorderType: RecordRTC.StereoAudioRecorder, // force for all browsers
+    numberOfAudioChannels: 2,
+    mimeType: 'audio/wav',
+    desiredSampRate: 16000,
+  })
 
-    let stream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
-    let recorder = new RecordRTCPromisesHandler(stream, {
-        type: 'audio',
-        recorderType: RecordRTC.StereoAudioRecorder, // force for all browsers
-        numberOfAudioChannels: 2,
-        mimeType: 'audio/wav',
-        desiredSampRate: 16000,
-    });
+  recorder.startRecording()
 
-    recorder.startRecording();
+  const sleep = (m) => new Promise((r) => setTimeout(r, m))
+  await sleep(1000)
 
-    const sleep = m => new Promise(r => setTimeout(r, m));
-    await sleep(1000);
+  await recorder.stopRecording()
+  stream.stop()
+  let blob = await recorder.getBlob()
+  sendData(blob)
 
-    await recorder.stopRecording();
-    stream.stop()
-    let blob = await recorder.getBlob();
-    sendData(blob)
-
-    //save audio
-    function sendData(audioBlob) {
-        console.log(audioBlob)
-        let data = new FormData()
-        data.append('file', audioBlob)
-        console.log(data)
-        const xhr = new XMLHttpRequest()
-        xhr.onreadystatechange = function () {
-            let my_string;
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                my_string = JSON.parse(xhr.response);
-                Toastify({
-                    text: my_string,
-                    duration: 3000,
-                    gravity: 'bottom', // `top` or `bottom`
-                    position: "left", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    },
-                }).showToast();
-            }
-        }
-        xhr.open('post', 'http://localhost:8000/uploadfile')
-        xhr.send(data)
+  //save audio
+  function sendData(audioBlob) {
+    console.log(audioBlob)
+    let data = new FormData()
+    data.append('file', audioBlob)
+    console.log(data)
+    const xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        let result = xhr.responseText.replaceAll('"', '')
+        changePage(result)
+      }
     }
+    xhr.open('post', 'http://localhost:8000/uploadfile')
+    xhr.send(data)
+  }
+  function changePage(result) {
+    console.log(result)
+    switch (result) {
+      case 'down':
+        url = 'http://localhost:8000/index.html'
+        break
+      case 'go':
+        url = 'http://localhost:8000/pages/inbox.html'
+        break
+      case 'left':
+        url = 'http://localhost:8000/pages/animations.html'
+        break
+      case 'no':
+        url = 'http://localhost:8000/pages/flot-charts.html'
+        break
+      case 'right':
+        url = 'http://localhost:8000/pages/normal-table.html'
+        break
+      case 'stop':
+        url = 'http://localhost:8000/pages/form-elements.html'
+        break
+      case 'up':
+        url = 'http://localhost:8000/pages/notification.html'
+        break
+      case 'yes':
+        url = 'http://localhost:8000/pages/contact.html'
+        break
+    }
+    window.open(url, '_top')
+    console.log(result) }
 }
