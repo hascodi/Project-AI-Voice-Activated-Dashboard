@@ -37,7 +37,6 @@ async def create_upload_file(request: Request):
         label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         imported = tf.saved_model.load("../NoteBooks/saved-Digit")
 
-
     else:
         x, _ = tf.audio.decode_wav(contents, desired_channels=1, desired_samples=16000, )
         label_names = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
