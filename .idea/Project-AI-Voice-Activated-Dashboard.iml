@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="materialize" level="application" />
     <orderEntry type="library" name="toastify-js" level="application" />
+    <orderEntry type="library" name="toastify-js" level="application" />
   </component>
 </module>
