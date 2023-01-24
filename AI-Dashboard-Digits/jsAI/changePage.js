@@ -1,14 +1,5 @@
 function changePage(result) {
     console.log("Result " + result)
-    Toastify({
-        text: result,
-        gravity: "top", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        offset: {
-            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-        },
-    }).showToast();
 
     switch (result) {
         case '1':
@@ -37,16 +28,5 @@ function changePage(result) {
             break
     }
     window.open(url + "?" + result, '_top')
-    Toastify({
-        text: result,
-        duration: 3000,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
-        }
-    }).showToast();
 }
 
