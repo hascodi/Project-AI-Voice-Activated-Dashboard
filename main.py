@@ -34,6 +34,7 @@ async def word(request: Request):
     prediction = imported(x)
     result = np.argmax(prediction[0])
     print(label_names[result])
+    print(label_names, prediction)
 
     return label_names[result]  # label_names[result]
 
@@ -55,6 +56,7 @@ async def digit(request: Request):
     prediction = imported(x)
     result = np.argmax(prediction[0])
     print(label_names[result])
+    print(label_names, prediction)
 
     return label_names[result]  # label_names[result]
 
