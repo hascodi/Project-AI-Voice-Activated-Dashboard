@@ -3,6 +3,7 @@ from fastapi import Request, FastAPI
 import tensorflow as tf
 import numpy as np
 from starlette.middleware.cors import CORSMiddleware
+import matplotlib.pyplot as plt
 
 app = FastAPI()
 
@@ -33,8 +34,8 @@ async def word(request: Request):
     # Predict
     prediction = imported(x)
     result = np.argmax(prediction[0])
-    print(label_names[result])
-    print(label_names, prediction)
+    plt.bar(label_names, tf.nn.softmax(prediction[0]))
+    plt.show()
 
     return label_names[result]  # label_names[result]
 
@@ -55,8 +56,9 @@ async def digit(request: Request):
     # Predict
     prediction = imported(x)
     result = np.argmax(prediction[0])
-    print(label_names[result])
-    print(label_names, prediction)
+
+    plt.bar(label_names, tf.nn.softmax(prediction[0]))
+    plt.show()
 
     return label_names[result]  # label_names[result]
 

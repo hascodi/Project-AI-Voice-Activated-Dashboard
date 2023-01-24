@@ -1,14 +1,5 @@
 function changePage(result) {
     console.log("Result " + result)
-    // Toastify({
-    //     text: result,
-    //     gravity: "top", // `top` or `bottom`
-    //     position: "left", // `left`, `center` or `right`
-    //     offset: {
-    //         x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-    //         y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-    //     },
-    // }).showToast();
 
     switch (result) {
         case 'down':
@@ -36,7 +27,7 @@ function changePage(result) {
             url = '../pages/contact.html'
             break
     }
-    window.open(url, '_top')
+    window.open(url + "?" + result, '_top')
 }
 
 function sleep(milliseconds) {

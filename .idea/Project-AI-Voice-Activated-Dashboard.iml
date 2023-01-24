@@ -7,7 +7,6 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (Project-AI-Voice-Activated-Dashboard)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="materialize" level="application" />
     <orderEntry type="library" name="toastify-js" level="application" />
     <orderEntry type="library" name="toastify-js" level="application" />
   </component>
